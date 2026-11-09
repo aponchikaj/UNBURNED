@@ -9,15 +9,11 @@ import { nav } from "@/lib/site";
 export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false);
 
   useEffect(() => {
-    if (!menuOpen && !cartOpen) return;
+    if (!menuOpen) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setMenuOpen(false);
-        setCartOpen(false);
-      }
+      if (e.key === "Escape") setMenuOpen(false);
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -25,7 +21,7 @@ export default function Header() {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [menuOpen, cartOpen]);
+  }, [menuOpen]);
 
   return (
     <>
@@ -58,18 +54,12 @@ export default function Header() {
           <Link href="/" className="header__logo" aria-label="UNBURNED">
             <Image src="/images/logo-black.png" alt="UNBURNED" width={24} height={36} priority />
           </Link>
-          <button className="header__cart" onClick={() => setCartOpen(true)}>
-            Cart
-          </button>
         </div>
       </header>
 
       <div
-        className={`drawer-backdrop${menuOpen || cartOpen ? " is-open" : ""}`}
-        onClick={() => {
-          setMenuOpen(false);
-          setCartOpen(false);
-        }}
+        className={`drawer-backdrop${menuOpen ? " is-open" : ""}`}
+        onClick={() => setMenuOpen(false)}
       />
 
       <aside aria-label="Menu" className={`drawer drawer--left${menuOpen ? " is-open" : ""}`} aria-hidden={!menuOpen} inert={!menuOpen}>
@@ -90,17 +80,6 @@ export default function Header() {
         </nav>
       </aside>
 
-      <aside aria-label="Cart" className={`drawer drawer--right${cartOpen ? " is-open" : ""}`} aria-hidden={!cartOpen} inert={!cartOpen}>
-        <button className="drawer__close" aria-label="Close cart" onClick={() => setCartOpen(false)}>
-          ×
-        </button>
-        <div className="cart-empty">
-          <p className="cart-empty__title">Your cart is empty</p>
-          <Link href="/collections/all" className="button" onClick={() => setCartOpen(false)}>
-            Continue shopping
-          </Link>
-        </div>
-      </aside>
     </>
   );
 }

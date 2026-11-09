@@ -128,10 +128,6 @@ ul {
   height: 36px;
 }
 
-.header__cart {
-  justify-self: end;
-}
-
 .header__burger {
   display: none;
   width: 24px;
@@ -186,11 +182,6 @@ ul {
   transform: translateX(-100%);
 }
 
-.drawer--right {
-  right: 0;
-  transform: translateX(100%);
-}
-
 .drawer__close {
   position: absolute;
   top: 12px;
@@ -209,22 +200,6 @@ ul {
 .drawer__nav a[aria-current="page"] {
   text-decoration: underline;
   text-underline-offset: 4px;
-}
-
-.cart-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  height: 100%;
-  text-align: center;
-}
-
-.cart-empty__title {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 700;
 }
 
 /* Footer */
